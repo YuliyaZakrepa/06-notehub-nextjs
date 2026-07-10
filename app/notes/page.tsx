@@ -6,13 +6,13 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 interface NotesProps {
-  params: Promise<{ search: string; page: number }>;
+  searchParams: Promise<{ search?: string; page?: string }>;
 }
 
-export default async function Notes({ params }: NotesProps) {
-  const searchParams = await params;
-  const search = searchParams.search || "";
-  const page = Number(searchParams.page) || 1;
+export default async function Notes({ searchParams }: NotesProps) {
+  const params = await searchParams;
+  const search = params.search || "";
+  const page = Number(params.page) || 1;
   const perPage = 12;
 
   const queryClient = new QueryClient();

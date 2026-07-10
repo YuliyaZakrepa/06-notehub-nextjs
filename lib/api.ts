@@ -22,7 +22,7 @@ export async function fetchNotes(
   sortBy?: string,
 ): Promise<FetchNotesResponse> {
   const { data } = await API.get<FetchNotesResponse>("/notes", {
-    params: { perPage },
+    params: { search, page, perPage, tag, sortBy},
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
@@ -42,7 +42,7 @@ export async function createNote(newNote: CreateNote): Promise<Note> {
   return data;
 }
 export async function deleteNote(noteId: Note["id"]): Promise<Note> {
-  const { data } = await API.delete<Note>(`notes/${noteId}`, {
+  const { data } = await API.delete<Note>(`/notes/${noteId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return data;
